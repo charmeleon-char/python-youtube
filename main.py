@@ -180,7 +180,7 @@ class routehandler(object):
 
 
 app = webapp2.WSGIApplication([
-  ('/*', routehandler),
+  ('/', routehandler),
    ('/json/', Jsonhandler),
    ('/try/', whynot),
    ('/potato/',potatohanlder)
