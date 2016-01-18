@@ -1,0 +1,23 @@
+
+  <md-content>
+    <md-list>
+    <md-toolbar class="md-theme-light">
+    <h2 class="md-toolbar-tools">
+      <span>List videos</span>
+    </h2>
+  </md-toolbar>
+      <md-subheader class="md-no-sticky">List videos</md-subheader>
+      <md-list-item class="md-3-line" ng-repeat="(key , value) in myData ">
+        <h2><a href="https://www.youtube.com/watch?v={{ value.id.videoId }}" target="_blank">
+              <img ng-src="{{ value.snippet.thumbnails.medium.url }}" class="md-avatar" alt="https://www.youtube.com/watch?v={{ value.id.videoId }}"  />
+      	   </a></h2>
+    
+        <div class="md-list-item-text" layout="column">
+                <h2><a href="https://www.youtube.com/watch?v={{ value.id.videoId }}" target="_blank">
+            {{ value.snippet.title }}
+      	   </a></h2>
+          <p>{{value.snippet.description}}</p>
+        </div>
+      </md-list-item>
+      <md-divider ></md-divider>
+  

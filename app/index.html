@@ -1,0 +1,192 @@
+<html lang="en" >
+<head>
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+<body ng-app="BlankApp" ng-cloak>
+  <!--
+    <md-whiteframe class="md-whiteframe-6dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center">
+    <span>.md-whiteframe-6dp</span>
+  </md-whiteframe>
+    Your HTML content here
+  -->  <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp">
+  <md-content>
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+      <md-tab label="one">
+        <md-content class="md-padding" ng-controller="customersCtrl as BlankApp">
+        <md-card>
+    <md-list>
+    <md-toolbar class="md-theme-light">
+    <h2 class="md-toolbar-tools">
+      <span>List videos from the channel</span>
+    </h2>
+  </md-toolbar>
+      <md-input-container>
+        <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+        <label>Search video with Title</label>
+      <input type="search" ng-model="query"> 
+        </md-content>
+      </md-input-container>
+      <md-input-container>
+        <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+        <label>Search video with Description</label>
+      <input type="search" ng-model="test"> 
+        </md-content>
+      </md-input-container>
+
+      <md-list-item class="md-1-line" ng-repeat="value in myData | toArray |  filter : query |  filter : test">
+      <div class="md-list-item-text" layout="column">
+          <a href="https://www.youtube.com/watch?v={{ value.id.videoId }}" target="_blank">
+          <img ng-src="{{ value.snippet.thumbnails.default.url }}" class="md-avatar"style="padding-right: 15px" alt="https://www.youtube.com/watch?v={{ value.id.videoId }}"  /></a>
+          <h2>{{ value.snippet.title }}</h2>
+          <br/>
+          <h5>Description:</h5>
+          <p> {{value.snippet.description}}</p>
+          <h5>Publish date: {{value.snippet.publishedAt}}</h5>
+          <md-divider ></md-divider>
+       </div>
+         </md-list-item>
+   <md-toolbar class="md-theme-light">
+    
+  </md-toolbar>
+       </md-list>
+     </md-card>
+        </md-content>
+      </md-tab>
+
+    <!---second tab-->  
+      <md-tab label="two">
+             <md-content class="md-padding" ng-controller="formController as BlankApp">
+        <md-card>
+    <md-list>
+    <md-toolbar class="md-theme-light">
+    <h2 class="md-toolbar-tools">
+      <span>List videos from the channel</span>
+    </h2>
+  </md-toolbar>
+  <md-input-container>
+      <md-input-container ng-controller="formController">
+      <form ng-submit="processForm()">
+    <!-- NAME -->
+    <div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+      <label>test</label>
+      <input type="text" name="title" class="form-control" placeholder="video" ng-model="formData.title">
+   </div>
+    <button type="submit" class="btn btn-success btn-lg btn-block">
+      <span class="glyphicon glyphicon-flash"></span> Submit!
+    </button>
+  </form>
+
+      </md-input-container>
+
+       
+          </md-input-container>
+      <md-list-item class="md-1-line" ng-repeat="value in Data | toArray ">
+      <div class="md-list-item-text" layout="column">
+          <a href="https://www.youtube.com/watch?v={{ value.id.videoId }}" target="_blank">
+          <img ng-src="{{ value.snippet.thumbnails.default.url }}" class="md-avatar"style="padding-right: 15px" alt="https://www.youtube.com/watch?v={{ value.id.videoId }}"  /></a>
+          <h2 ng-click="fill(value)">{{ value.snippet.title }}</h2>
+          <br/>
+          <h5>Description:</h5>
+          <p> {{value.snippet.description}}</p>
+          <h5>Publish date: {{value.publishedAt}}</h5>
+          <md-divider ></md-divider>
+       </div>
+         </md-list-item>
+   <md-toolbar class="md-theme-light">
+    <pre>
+    {{ formData }}
+  </pre>
+
+  </md-toolbar>
+       </md-list>
+     </md-card>
+        </md-content>
+            </md-tab>
+      <md-tab label="three">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab Three</h1>
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
+  
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+  
+  <!-- Your application bootstrap  -->
+  <script type="text/javascript">    
+    /**
+     * You must include the dependency on 'ngMaterial' 
+     */
+    angular.module('BlankApp', ['ngMaterial'])
+  .controller('customersCtrl', function($scope, $http) {
+  $http.get("https://python-youtube-1192.appspot.com/try").then(function (response) {
+  $scope.myData =response.data.videos ;    
+       
+  });
+ 
+})
+.filter('toArray', function () {
+  return function (obj, addKey) {
+    if (!angular.isObject(obj)) return obj;
+    if ( addKey === false ) {
+      return Object.keys(obj).map(function(key) {
+        return obj[key];
+      });
+    } else {
+      return Object.keys(obj).map(function (key) {
+        var value = obj[key];
+        return angular.isObject(value) ?
+          Object.defineProperty(value, '$key', { enumerable: false, value: key}) :
+          { $key: key, $value: value };
+      });
+    }
+  };
+})
+.controller('formController',function($scope, $http) {
+      // create a blank object to hold our form information
+      // $scope will allow this to pass between controller and view
+      $scope.formData = {};
+      $scope.Data = {};
+
+      // process the form
+      $scope.processForm = function() {
+        $http({
+              method  : 'POST',
+              url     : 'https://python-youtube-1192.appspot.com/json',
+              data    : $.param($scope.formData),  // pass in data as strings
+              headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+          })
+              .success(function(data) {
+                console.log($scope.formData.title);
+                 $scope.Data = data.videos;
+                 console.log($scope.Data);
+                  if (!data.success) {
+                    // if not successful, bind errors to error variables
+                 
+                  } else {
+                    // if successful, bind success message to message
+                   
+                  
+                  }
+              $scope.fill = function(value){
+                 $scope.selectedfill = value;
+              }   
+              });
+      };
+    });
+
+  </script>
+  
+</body>
+</html>
